@@ -163,13 +163,16 @@ patient-intake-issue-blood-loss = Blood loss from a wound
 patient-intake-symptom-blood-loss = Pale, dizzy, lost a lot of blood
 patient-intake-issue-blind = Eye damage
 patient-intake-symptom-blind = Complains of blurry vision
-patient-intake-issue-missing-organ = Missing internal organ
+patient-intake-issue-missing-organ = Missing internal organ: {$part}
 patient-intake-symptom-missing-organ = Survived an organ theft
-patient-intake-issue-missing-extremity = Missing hand or foot
+patient-intake-issue-missing-extremity = Missing hand or foot: {$part}
 patient-intake-symptom-missing-extremity = Lost an extremity in an accident
+patient-intake-issue-missing-limb = Missing arm or leg: {$part}
+patient-intake-symptom-missing-limb = Lost a limb in an accident
 patient-intake-issue-replace-eyes = Requests new eyes (transplant)
 patient-intake-issue-replace-liver = Requests a liver transplant
 patient-intake-issue-replace-lungs = Requests a lung transplant
+patient-intake-issue-prosthesis = Wants a prosthesis: {$part}
 
 ## Device linking
 
