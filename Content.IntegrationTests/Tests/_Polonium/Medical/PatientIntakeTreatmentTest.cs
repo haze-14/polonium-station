@@ -66,6 +66,8 @@ public sealed class PatientIntakeTreatmentTest : GameTest
         { "HandLeft", "ArmLeft" }, { "HandRight", "ArmRight" }, { "FootLeft", "LegLeft" }, { "FootRight", "LegRight" },
     };
 
+    private static readonly ProtoId<PatientIntakeIssuePrototype> ProsthesisIssue = "PatientIntakeProsthesis";
+
     [Test]
     public async Task EveryIssueCanBeTreated()
     {
@@ -212,8 +214,8 @@ public sealed class PatientIntakeTreatmentTest : GameTest
             entMan.GetComponent<SurgeryTargetComponent>(patient).SepsisImmune = true;
             var comp = entMan.AddComponent<PatientIntakePatientComponent>(patient);
             comp.ExpectedParts = intake.PartCategories(patient);
-            Assert.That(intake.ApplyIssue(patient, comp, server.ProtoMan.Index<PatientIntakeIssuePrototype>("PatientIntakeProsthesis")), Is.True);
-            var category = comp.IssueParts["PatientIntakeProsthesis"];
+            Assert.That(intake.ApplyIssue(patient, comp, server.ProtoMan.Index(ProsthesisIssue)), Is.True);
+            var category = comp.IssueParts[ProsthesisIssue];
 
             TransplantFromDonor(entMan, patient, donor, category, replace: true);
             Assert.That(intake.GetFailures((patient, comp)).Any(f => f.Kind == IntakeFailureKind.RequestNotDone), Is.True,
@@ -245,7 +247,7 @@ public sealed class PatientIntakeTreatmentTest : GameTest
     /// <summary>
     /// Puts the donor's organ of this category in, removing the patient's own first for a swap request.
     /// </summary>
-    private static void TransplantFromDonor(IEntityManager entMan, EntityUid patient, EntityUid donor, string category, bool replace, string? prosthetic = null)
+    private static void TransplantFromDonor(IEntityManager entMan, EntityUid patient, EntityUid donor, string category, bool replace, string prosthetic = null)
     {
         var containers = entMan.System<SharedContainerSystem>();
         var patientBody = entMan.GetComponent<BodyComponent>(patient);
